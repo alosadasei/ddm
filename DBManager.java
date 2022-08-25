@@ -27,7 +27,7 @@ public class DBManager {
 	public Skill getSkill(int id) {
 		ResultSet rs = null;
 		Statement st = null;
-		Connection conn = null;
+		Connection conn = getConnection();
 		Skill skill = new Skill();
 		try {
 			String sql = "select * from skills where id="+id;
@@ -48,7 +48,7 @@ public class DBManager {
 	public Monster getMonster(int id) {
 		ResultSet rs = null;
 		Statement st = null;
-		Connection conn = null;
+		Connection conn = getConnection();
 		Monster monster = new Monster();
 		try {
 			String sql = "select * from monsters where id="+id;
