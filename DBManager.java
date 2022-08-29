@@ -48,12 +48,16 @@ public class DBManager {
 	public Monster getMonster(int id) {
 		ResultSet rs = null;
 		Statement st = null;
-		Connection conn = getConnection();
+		Connection conn = null;
 		Monster monster = new Monster();
+		Dice dice = new Dice();
 		try {
+			conn = getConnection();
 			String sql = "select * from monsters where id="+id;
+			st = conn.createStatement();
 			rs = st.executeQuery(sql);
 			if(rs.next()) {
+				monster.setId(id);
 				monster.setName(rs.getString("name"));
 				monster.setType(rs.getString("type"));
 				monster.setATK(rs.getInt("ATK"));
@@ -61,12 +65,13 @@ public class DBManager {
 				monster.setPS(rs.getInt("PS"));
 				monster.setAero(rs.getBoolean("aero"));
 				monster.setSubter(rs.getBoolean("subter"));
-				monster.setDice(new Dice(rs.getString("sideA_seal"),rs.getInt("sideA_value"),
-						rs.getString("sideB_seal"),rs.getInt("sideB_value"),
-						rs.getString("sideC_seal"),rs.getInt("sideC_value"),
-						rs.getString("sideD_seal"),rs.getInt("sideD_value"),
-						rs.getString("sideE_seal"),rs.getInt("sideE_value"),
-						rs.getString("sideF_seal"),rs.getInt("sideF_value")));
+				dice.addSide(rs.getString("sideA_seal"),rs.getInt("sideA_value"));
+				dice.addSide(rs.getString("sideB_seal"),rs.getInt("sideB_value"));
+				dice.addSide(rs.getString("sideC_seal"),rs.getInt("sideC_value"));
+				dice.addSide(rs.getString("sideD_seal"),rs.getInt("sideD_value"));
+				dice.addSide(rs.getString("sideE_seal"),rs.getInt("sideE_value"));
+				dice.addSide(rs.getString("sideF_seal"),rs.getInt("sideF_value"));
+				monster.setDice(dice);
 				if(rs.getInt("id_skill1")>0) {
 					monster.setSkill1(getSkill(rs.getInt("id_skill1")));
 				}
@@ -84,6 +89,35 @@ public class DBManager {
 			e.printStackTrace();
 		}
 		return monster;
+	}
+	
+	public Item getItem(int id) {
+		ResultSet rs = null;
+		Statement st = null;
+		Connection conn = null;
+		Item item = new Item();
+		Dice dice = new Dice();
+		try {
+			conn = getConnection();
+			String sql = "select * from items where id="+id;
+			st=conn.createStatement();
+			rs=st.executeQuery(sql);
+			if(rs.next()) {
+				item.setId(id);
+				item.setName(rs.getString("name"));
+				item.setEffect(rs.getString("effect"));
+				dice.addSide(rs.getString("sideA_seal"),rs.getInt("sideA_value"));
+				dice.addSide(rs.getString("sideB_seal"),rs.getInt("sideB_value"));
+				dice.addSide(rs.getString("sideC_seal"),rs.getInt("sideC_value"));
+				dice.addSide(rs.getString("sideD_seal"),rs.getInt("sideD_value"));
+				dice.addSide(rs.getString("sideE_seal"),rs.getInt("sideE_value"));
+				dice.addSide(rs.getString("sideF_seal"),rs.getInt("sideF_value"));
+				item.setDice(dice);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return item;
 	}
 	
 }
