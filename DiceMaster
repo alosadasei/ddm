@@ -1,0 +1,24 @@
+package ddm.objects;
+
+public class DiceMaster {
+	
+	private int hearts;
+	
+	public DiceMaster() {
+		hearts=3;
+	}
+	
+	public void lossHeart() {
+		hearts--;
+	}
+	
+	public void gainHeart() {
+		if(hearts < 3) {
+			hearts++;
+		}
+	}
+	
+	public int getHearts() {
+		return hearts;
+	}
+}
