@@ -3,9 +3,15 @@ package ddm.objects;
 public class DiceMaster {
 	
 	private int hearts;
+	private final int owner;
 	
-	public DiceMaster() {
+	public DiceMaster(int owner) {
 		hearts=3;
+		this.owner=owner;
+	}
+	
+	public int getOwner() {
+		return owner;
 	}
 	
 	public void lossHeart() {
