@@ -2,6 +2,8 @@ package ddm.objects;
 
 public class Square {
 
+	private int owner;
+	private boolean hasDiceMaster;
 	private boolean hasPath;
 	private Monster monster;
 	private boolean hasMonster;
@@ -9,11 +11,27 @@ public class Square {
 	private Item item;
 	private boolean hasItem;
 	
-	public Square() {
+	public Square(boolean hasDiceMaster) {
 		hasPath = false;
 		hasMonster = false;
 		hasFlyingMonster = false;
 		hasItem = false;
+	}
+	
+	public void setDiceMaster() {
+		
+	}
+	
+	public void setOwner(int owner) {
+		this.owner=owner;
+	}
+	
+	public int getOwner() {
+		return owner;
+	}
+	
+	public boolean hasDiceMaster() {
+		return hasDiceMaster;
 	}
 	
 	public void makePath() {
